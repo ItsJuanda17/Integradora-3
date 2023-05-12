@@ -1,3 +1,6 @@
+package model;
+import java.util.Calendar;
+
 public class PremiumUser extends User {
 
 	/**
@@ -7,8 +10,7 @@ public class PremiumUser extends User {
 	 * @param vinculationDate
 	 */
 	public PremiumUser(String name, String cc, Calendar vinculationDate) {
-		// TODO - implement PremiumUser.PremiumUser
-		throw new UnsupportedOperationException();
+		super(name , cc , vinculationDate);
 	}
 
 }

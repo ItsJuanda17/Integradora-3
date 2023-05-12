@@ -1,6 +1,10 @@
+package model;
+
 public class Magazine extends BibliographicProducts {
 
 	private String periodicityOfIssuance;
+	
+	
 	private int activeSuscriptions;
 
 	/**
@@ -16,7 +20,7 @@ public class Magazine extends BibliographicProducts {
 	 * @param activeSuscriptions
 	 * @param category
 	 */
-	public void operation(String name, int pagesNumber, date publicationDate, int accumulatedPagesRead, String id, double productValue, String URL, String periodicityOfIssuance, int activeSuscriptions, Category category) {
+	public void Magazine(String name, int pagesNumber, date publicationDate, int accumulatedPagesRead, String id, double productValue, String URL, String periodicityOfIssuance, int activeSuscriptions, Category category) {
 		// TODO - implement Magazine.operation
 		throw new UnsupportedOperationException();
 	}

@@ -1,3 +1,7 @@
+package model;
+
+import java.util.Calendar;
+
 public class RegularUser extends User {
 
 	/**
@@ -7,8 +11,12 @@ public class RegularUser extends User {
 	 * @param vinculationDate
 	 */
 	public RegularUser(String name, String cc, Calendar vinculationDate) {
-		// TODO - implement RegularUser.RegularUser
-		throw new UnsupportedOperationException();
+		super(name , cc , vinculationDate);
+
+	}
+
+	public String toString(){
+		return "Usuario: " + super.toString();
 	}
 
 }

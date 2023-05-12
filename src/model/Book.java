@@ -1,7 +1,11 @@
+package model;
+import java.util.Calendar;
+
 public class Book extends BibliographicProducts {
 
 	private String shortReview;
 	private int copiesSold;
+	private Genre genre;
 
 	/**
 	 * 
@@ -16,9 +20,13 @@ public class Book extends BibliographicProducts {
 	 * @param copiesSold
 	 * @param genre
 	 */
-	public Book(String name, int pagesNumber, date publicationDate, int accumulatedPagesRead, String id, double productValue, String URL, String shortReview, int copiesSold, Genre genre) {
-		// TODO - implement Book.Book
-		throw new UnsupportedOperationException();
+	public Book(String name, int pagesNumber, Calendar publicationDate, int accumulatedPagesRead, String id ,double productValue, String URL, String shortReview, int copiesSold, Genre genre ) {
+		super(name, pagesNumber, publicationDate, accumulatedPagesRead, id, productValue, URL);
+		this.shortReview = shortReview;
+		this.copiesSold= copiesSold;
+		this.genre = genre;
+		
+
 	}
 
 	public String getShortReview() {

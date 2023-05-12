@@ -1,8 +1,12 @@
+package model; 
+import java.util.Calendar;
+
+
 public abstract class BibliographicProducts {
 
 	private String name;
 	private int pagesNumber;
-	private date publicationDate;
+	private Calendar publicationDate;
 	private int accumulatedPagesRead;
 	private String id;
 	private double productValue;
@@ -18,9 +22,17 @@ public abstract class BibliographicProducts {
 	 * @param productValue
 	 * @param URL
 	 */
-	public BibliographicProducts(String name, int pagesNumber, date publicationDate, int accumulatedPagesRead, String id, double productValue, String URL) {
-		// TODO - implement BibliographicProducts.BibliographicProducts
-		throw new UnsupportedOperationException();
+	public BibliographicProducts(String name, int pagesNumber, Calendar publicationDate, int accumulatedPagesRead, String id, double productValue, String URL) {
+		this.name = name;
+		this.pagesNumber= pagesNumber;
+		this.publicationDate= publicationDate;
+		this.accumulatedPagesRead=accumulatedPagesRead;
+		this.id= id;
+		this.productValue = productValue;
+		this.URL= URL;
+
+
+		
 	}
 
 	public String getName() {

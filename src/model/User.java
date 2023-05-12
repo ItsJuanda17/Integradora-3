@@ -1,3 +1,6 @@
+package model;
+import java.util.Calendar;
+
 public abstract class User {
 
 	private String name;
@@ -10,13 +13,14 @@ public abstract class User {
 	 * @param cc
 	 * @param vinculationDate
 	 */
-	public User(String name, String cc, date vinculationDate) {
-		// TODO - implement User.User
-		throw new UnsupportedOperationException();
+	public User(String name, String cc, Calendar vinculationDate) {
+		this.name = name;
+		this.cc=cc;
+		this.vinculationDate=vinculationDate;
 	}
 
 	public String getName() {
-		return this.name;
+		return name;
 	}
 
 	/**
@@ -28,8 +32,7 @@ public abstract class User {
 	}
 
 	public String getCC() {
-		// TODO - implement User.getCC
-		throw new UnsupportedOperationException();
+		return cc;
 	}
 
 	/**
@@ -37,12 +40,11 @@ public abstract class User {
 	 * @param cc
 	 */
 	public void setCC(String cc) {
-		// TODO - implement User.setCC
-		throw new UnsupportedOperationException();
+		this.cc= cc;
 	}
 
 	public Calendar getVinculationDate() {
-		return this.vinculationDate;
+		return vinculationDate;
 	}
 
 	/**
@@ -51,6 +53,10 @@ public abstract class User {
 	 */
 	public void setVinculationDate(Calendar date) {
 		this.vinculationDate = date;
+	}
+
+	public String toString(){
+		return name;
 	}
 
 }
