@@ -9,6 +9,7 @@ public class Book extends BibliographicProducts {
 	private Genre genre;
 	private String id;
 
+
 	/**
 	 * 
 	 * @param name
@@ -74,6 +75,10 @@ public class Book extends BibliographicProducts {
 
 
 	}
+
+	public Genre getGenre() {
+        return genre;
+    }
 
 }
 

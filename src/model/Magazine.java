@@ -71,5 +71,11 @@ public class Magazine extends BibliographicProducts {
         return sb.toString();
     }
 
-	}
+	public Category getCategory() {
+        return category;
+    }
+
+
+
+}
 

@@ -43,6 +43,8 @@ public class Main {
 			System.out.println("1. Register User");
 			System.out.println("2.Users list");
 			System.out.println("3.Register bibliographic products");
+			System.out.println("4.Bibliographic products list");
+			System.out.println("5.Modify bibliographic products");
 			
 	}
 
@@ -50,6 +52,7 @@ public class Main {
 		switch(option){
 			case 0:
 			    System.out.println("Thanks for using the system");
+				break;
 			
 			case 1:
 			    registerUser();
@@ -61,6 +64,17 @@ public class Main {
 			case 3:
 			    registerBibliographicProducts();
 				break;
+
+			case 4:
+			    controller.displayProductList();
+				break;
+			
+			
+			case 5:
+			    updateBibliographicProducts();
+				break;
+
+			
 			
 			
 			default :
@@ -131,7 +145,7 @@ public class Main {
 			reader.nextLine();
 
 			System.out.println("Type the book name: ");
-			name = reader.next();
+			name = reader.nextLine();
 
 			System.out.println("Type the number pages of the book: ");
 			pagesNumber = reader.nextInt();
@@ -157,11 +171,12 @@ public class Main {
 
 			System.out.println("please type the price of the book");
 			productValue = reader.nextDouble();
+			reader.nextLine();
 
 			System.out.println("please type the url of the cover page");
-			URL = reader.next();
+			URL = reader.nextLine();
 
-			System.out.print("short corta: ");
+			System.out.print("short description: ");
             shortReview = reader.nextLine();
 
             System.out.print("Genre (1.SCIENCE FICTION , 2. FANTASY, 3. HISTORICAL NOVEL): ");
@@ -181,7 +196,7 @@ public class Main {
 			reader.nextLine();
 
 			System.out.println("Type the magazine name: ");
-			name = reader.next();
+			name = reader.nextLine();
 
 			System.out.println("Type the pages number of the magazine: ");
 			pagesNumber =reader.nextInt();

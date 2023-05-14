@@ -46,8 +46,7 @@ public abstract class BibliographicProducts {
 	}
 
 	public Calendar getPublicationDate() {
-		// TODO - implement BibliographicProducts.getPublicationDate
-		throw new UnsupportedOperationException();
+		return publicationDate;
 	}
 
 	/**
@@ -55,8 +54,8 @@ public abstract class BibliographicProducts {
 	 * @param publicationDate
 	 */
 	public void setPublicationDate(Calendar publicationDate) {
-		// TODO - implement BibliographicProducts.setPublicationDate
-		throw new UnsupportedOperationException();
+		
+		this.publicationDate = publicationDate;
 	}
 
 	
@@ -74,17 +73,31 @@ public abstract class BibliographicProducts {
 	}
 
 	public String getURL() {
-		// TODO - implement BibliographicProducts.getURL
-		throw new UnsupportedOperationException();
+		return URL;
 	}
 
 	/**
 	 * 
 	 * @param url
 	 */
-	public void setURL(String url) {
-		// TODO - implement BibliographicProducts.setURL
-		throw new UnsupportedOperationException();
+	public void setURL(String URL) {
+		this.URL = URL;
+	}
+
+	public int getAccumulatedPagesRead(){
+		return accumulatedPagesRead;
+	}
+
+	public void setAccumulatedPagesRead(int accumulatedPagesRead){
+		this.accumulatedPagesRead = accumulatedPagesRead;
+	}
+
+	public int getPagesNumber(){
+		return pagesNumber;
+	}
+
+	public void setPagesNumber(int pagesNumber){
+		this.pagesNumber = pagesNumber;
 	}
 
 	public abstract String generateRandomId();

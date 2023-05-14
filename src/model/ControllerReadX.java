@@ -3,6 +3,8 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 public class ControllerReadX {
 
@@ -52,7 +54,7 @@ public class ControllerReadX {
 
 	}
 
-	public String registerBook(String name,  int pagesNumber, Calendar publicationDate, int accumulatedPagesRead,double productValue, String URL, String shortReview, int copiesSold, int genre   ){
+	public void registerBook(String name,  int pagesNumber, Calendar publicationDate, int accumulatedPagesRead,double productValue, String URL, String shortReview, int copiesSold, int genre   ){
 
 		Genre bookGenre;
 
@@ -73,7 +75,7 @@ public class ControllerReadX {
 		Book book = new Book(name,  pagesNumber, publicationDate, accumulatedPagesRead,  productValue, URL, shortReview, copiesSold, bookGenre );
 		productList.add(book);
 
-		return "The book has been successfully registered";
+		System.out.println("The book has been succesfully registered");;
 
 	}
 
@@ -103,8 +105,41 @@ public class ControllerReadX {
 
 	}
 
-
-
+	public void displayProductList() {
+		System.out.println("LIST OF BIBLIOGRAPHIC PRODUCTS");
+		
+		for (BibliographicProducts product : productList) {
+			String id = product.generateRandomId();
+			System.out.println("Product ID: " + id);
+			System.out.println("Name: " + product.getName());
+			System.out.println("Pages Number: " + product.getPagesNumber());
+			System.out.println("Publication Date: " + formatPublicationDate(product.getPublicationDate()));
+			System.out.println("Accumulated Pages Read: " + product.getAccumulatedPagesRead());
+			System.out.println("Product Value: " + product.getProductValue());
+			System.out.println("URL: " + product.getURL());
+			
+			if (product instanceof Book) {
+				Book book = (Book) product;
+				
+				System.out.println("Short Review: " + book.getShortReview());
+				System.out.println("Copies Sold: " + book.getCopiesSold());
+				System.out.println("Genre: " + book.getGenre());
+			} else if (product instanceof Magazine) {
+				Magazine magazine = (Magazine) product;
+				
+				System.out.println("Periodicity of Issuance: " + magazine.getPeriodicityOfIssuance());
+				System.out.println("Active Subscriptions: " + magazine.getActiveSuscriptions());
+				System.out.println("Category: " + magazine.getCategory());
+			}
+			
+			System.out.println("--------------------");
+		}
+	}
 	
+	private String formatPublicationDate(Calendar publicationDate) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		return dateFormat.format(publicationDate.getTime());
+	}
+
 
 }
