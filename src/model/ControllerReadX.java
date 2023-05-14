@@ -78,7 +78,7 @@ public class ControllerReadX {
 	}
 
 	
-	public String registerMagazine(String name, int pagesNumber, Calendar publicationDate, int accumulatedPagesRead, double productValue, String URL, String periodicityOfIssuance, int activeSuscriptions, int category){
+	public void registerMagazine(String name, int pagesNumber, Calendar publicationDate, int accumulatedPagesRead, double productValue, String URL, String periodicityOfIssuance, int activeSuscriptions, int category){
 
 		Category magazineCategory;
 
@@ -99,7 +99,7 @@ public class ControllerReadX {
 		Magazine magazine = new Magazine(name, pagesNumber, publicationDate,  accumulatedPagesRead, productValue, URL,  periodicityOfIssuance,  activeSuscriptions, magazineCategory);
 		productList.add(magazine);
 
-		return "The magazine has been successfully registered";
+		System.out.println("The magazine has been successfully registered");
 
 	}
 

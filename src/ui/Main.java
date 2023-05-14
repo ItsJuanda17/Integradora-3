@@ -42,7 +42,7 @@ public class Main {
 			System.out.println("0. Exit the system");
 			System.out.println("1. Register User");
 			System.out.println("2.Users list");
-			
+			System.out.println("3.Register bibliographic products");
 			
 	}
 
@@ -60,6 +60,7 @@ public class Main {
 			
 			case 3:
 			    registerBibliographicProducts();
+				break;
 			
 			
 			default :
@@ -147,7 +148,7 @@ public class Main {
 
 			}catch(ParseException e){
 				System.out.println("invalid date format");
-				return ;
+				return  ;
 
 			}
 
