@@ -8,7 +8,6 @@ public abstract class BibliographicProducts {
 	private int pagesNumber;
 	private Calendar publicationDate;
 	private int accumulatedPagesRead;
-	private String id;
 	private double productValue;
 	private String URL;
 
@@ -22,12 +21,11 @@ public abstract class BibliographicProducts {
 	 * @param productValue
 	 * @param URL
 	 */
-	public BibliographicProducts(String name, int pagesNumber, Calendar publicationDate, int accumulatedPagesRead, String id, double productValue, String URL) {
+	public BibliographicProducts(String name, int pagesNumber, Calendar publicationDate, int accumulatedPagesRead,  double productValue, String URL) {
 		this.name = name;
 		this.pagesNumber= pagesNumber;
 		this.publicationDate= publicationDate;
 		this.accumulatedPagesRead=accumulatedPagesRead;
-		this.id= id;
 		this.productValue = productValue;
 		this.URL= URL;
 
@@ -61,17 +59,7 @@ public abstract class BibliographicProducts {
 		throw new UnsupportedOperationException();
 	}
 
-	public String getId() {
-		return this.id;
-	}
-
-	/**
-	 * 
-	 * @param id
-	 */
-	public void setId(String id) {
-		this.id = id;
-	}
+	
 
 	public double getProductValue() {
 		return this.productValue;
@@ -98,5 +86,9 @@ public abstract class BibliographicProducts {
 		// TODO - implement BibliographicProducts.setURL
 		throw new UnsupportedOperationException();
 	}
+
+	public abstract String generateRandomId();
+
+	
 
 }

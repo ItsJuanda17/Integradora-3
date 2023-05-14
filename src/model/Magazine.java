@@ -1,11 +1,14 @@
 package model;
+import java.util.Random;
+
+import java.util.Calendar;
 
 public class Magazine extends BibliographicProducts {
 
 	private String periodicityOfIssuance;
-	
-	
 	private int activeSuscriptions;
+	private Category category;
+	private String id;
 
 	/**
 	 * 
@@ -20,9 +23,13 @@ public class Magazine extends BibliographicProducts {
 	 * @param activeSuscriptions
 	 * @param category
 	 */
-	public void Magazine(String name, int pagesNumber, date publicationDate, int accumulatedPagesRead, String id, double productValue, String URL, String periodicityOfIssuance, int activeSuscriptions, Category category) {
-		// TODO - implement Magazine.operation
-		throw new UnsupportedOperationException();
+	public Magazine(String name, int pagesNumber, Calendar publicationDate, int accumulatedPagesRead, double productValue, String URL, String periodicityOfIssuance, int activeSuscriptions, Category category ) {
+		super(name , pagesNumber, publicationDate , accumulatedPagesRead,  productValue , URL);
+		this.periodicityOfIssuance = periodicityOfIssuance;
+		this.activeSuscriptions = activeSuscriptions;
+		this.category = category;
+		this.id=generateRandomId();
+
 	}
 
 	public String getPeriodicityOfIssuance() {
@@ -49,4 +56,20 @@ public class Magazine extends BibliographicProducts {
 		this.activeSuscriptions = activeSuscriptions;
 	}
 
-}
+	@Override
+	public String generateRandomId(){
+		String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        StringBuilder sb = new StringBuilder();
+        Random random = new Random();
+
+        for (int i = 0; i < 3; i++) {
+            int index = random.nextInt(characters.length());
+            char randomChar = characters.charAt(index);
+            sb.append(randomChar);
+        }
+
+        return sb.toString();
+    }
+
+	}
+
