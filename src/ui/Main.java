@@ -97,6 +97,19 @@ public class Main {
 		return option;
 	}
 
+	private Calendar parsePublicationDate(String publicationDateStr) {
+        // Parsear la fecha de publicación en formato dd/mm/yyyy
+        String[] dateParts = publicationDateStr.split("/");
+        int day = Integer.parseInt(dateParts[0]);
+        int month = Integer.parseInt(dateParts[1]) - 1; // Restar 1 porque los meses en Calendar van de 0 a 11
+        int year = Integer.parseInt(dateParts[2]);
+        
+        Calendar publicationDate = Calendar.getInstance();
+        publicationDate.set(year, month, day);
+        
+        return publicationDate;
+    }
+
 	public void registerUser() {
 
 		System.out.println("Hi , please enter the user name");
@@ -240,8 +253,41 @@ public class Main {
 	}
 
 	public void updateBibliographicProducts() {
-		// TODO - implement Main.updateBibliographicProducts
-		throw new UnsupportedOperationException();
+
+		System.out.println("Please type the name of the product that you want to modify");
+		String productName = reader.nextLine();
+		reader.nextLine();
+
+		System.out.println("Type the new name of the product: ");
+		String newName = reader.nextLine();
+
+		System.out.println("Type the new pages number: ");
+		int newPagesNumber = reader.nextInt();
+		reader.nextLine();
+
+		System.out.println("Type the new publication date: ");
+		String newPublicationDateStr = reader.nextLine();
+		Calendar newPublicationDate = parsePublicationDate(newPublicationDateStr);
+		
+		System.out.println("Type the new value of the product: ");
+		double newProductValue = reader.nextDouble();
+		reader.nextLine();
+        
+		System.out.println("Type the new URL of the product: ");
+		String newURL = reader.nextLine();
+
+		System.out.println("Type the new short review: ");
+		String newShortReview = reader.nextLine();
+
+		System.out.println("Type the new periodicity of issuance :");
+		String newPeriodicitOfIssuance = reader.nextLine();
+	
+
+		String result = controller.modifyProduct(productName, newName, newPagesNumber, newPublicationDate, newProductValue, newURL, newShortReview, newPeriodicitOfIssuance); 
+		System.out.println(result); 
+
+
+		
 	}
 
 }

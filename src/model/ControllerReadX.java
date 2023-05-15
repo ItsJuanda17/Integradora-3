@@ -141,5 +141,30 @@ public class ControllerReadX {
 		return dateFormat.format(publicationDate.getTime());
 	}
 
+	public String modifyProduct(String productName , String newName , int newPagesNumber ,Calendar newPublicationDate, double newProductValue , String newURL , String newShortReview , String newPeriodicityOfIssuance  ){
+		for (BibliographicProducts product : productList) {
+			if (product.getName().equalsIgnoreCase(productName)) {
+				product.setName(newName);
+				product.setPagesNumber(newPagesNumber);
+				product.setPublicationDate(newPublicationDate);
+				product.setProductValue(newProductValue);
+				product.setURL(newURL);
+				
+				if (product instanceof Book) {
+					((Book) product).setShortReview(newShortReview);
+				} else if (product instanceof Magazine) {
+					((Magazine) product).setPeriodicityOfIssuance(newPeriodicityOfIssuance);
+				}
+				
+				return "The product has been successfully modified ";
+			}
+		}
+		
+		return "The product doesnt exist ";
+
+
+	}
+
+
 
 }
