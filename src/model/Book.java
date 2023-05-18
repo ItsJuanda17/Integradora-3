@@ -80,5 +80,9 @@ public class Book extends BibliographicProducts {
         return genre;
     }
 
+	public void setGenre(Genre genre){
+		this.genre = genre;
+	}
+
 }
 

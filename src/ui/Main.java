@@ -2,6 +2,10 @@ package ui;
 
 import java.util.Calendar;
 import java.util.Scanner;
+
+
+
+import model.BibliographicProducts;
 import model.ControllerReadX;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -43,8 +47,7 @@ public class Main {
 			System.out.println("1. Register User");
 			System.out.println("2.Users list");
 			System.out.println("3.Register bibliographic products");
-			System.out.println("4.Bibliographic products list");
-			System.out.println("5.Modify bibliographic products");
+			System.out.println("4.Modify bibliographic products");
 			
 	}
 
@@ -60,18 +63,17 @@ public class Main {
 			
 			case 2:
 			    controller.showUserList();
+				break;
 			
 			case 3:
 			    registerBibliographicProducts();
 				break;
 
+	
+			
+			
 			case 4:
-			    controller.displayProductList();
-				break;
-			
-			
-			case 5:
-			    updateBibliographicProducts();
+			    modifyBibliographicProducts();
 				break;
 
 			
@@ -120,6 +122,7 @@ public class Main {
 
 		System.out.println("Type the vinculation year");
 		int year= reader.nextInt();
+		reader.nextLine();
 
 		System.out.println("Type the vinculation month, remember(1-12)");
 		int month = reader.nextInt() -1;
@@ -250,44 +253,86 @@ public class Main {
 
 		}
 		
+
 	}
 
-	public void updateBibliographicProducts() {
-
-		System.out.println("Please type the name of the product that you want to modify");
-		String productName = reader.nextLine();
-		reader.nextLine();
-
-		System.out.println("Type the new name of the product: ");
-		String newName = reader.nextLine();
-
-		System.out.println("Type the new pages number: ");
-		int newPagesNumber = reader.nextInt();
-		reader.nextLine();
-
-		System.out.println("Type the new publication date: ");
-		String newPublicationDateStr = reader.nextLine();
-		Calendar newPublicationDate = parsePublicationDate(newPublicationDateStr);
+	public void modifyBibliographicProducts() {
 		
-		System.out.println("Type the new value of the product: ");
-		double newProductValue = reader.nextDouble();
-		reader.nextLine();
-        
-		System.out.println("Type the new URL of the product: ");
-		String newURL = reader.nextLine();
-
-		System.out.println("Type the new short review: ");
-		String newShortReview = reader.nextLine();
-
-		System.out.println("Type the new periodicity of issuance :");
-		String newPeriodicitOfIssuance = reader.nextLine();
-	
-
-		String result = controller.modifyProduct(productName, newName, newPagesNumber, newPublicationDate, newProductValue, newURL, newShortReview, newPeriodicitOfIssuance); 
-		System.out.println(result); 
-
-
+			System.out.println("MODIFY BIBLIOGRAPHIC PRODUCTS");
+			System.out.println("Enter the name of the product to modify: ");
+			String productName = reader.next();
 		
+			BibliographicProducts product = controller.findProductByName(productName);
+		
+			if (product == null) {
+				System.out.println("Product not found");
+				return;
+			}
+		
+			System.out.println("The product is found");
+			controller.displayProductList(product);
+		
+			System.out.println("Please select the type of product to modify (1. Book, 2. Magazine): ");
+			int productType = reader.nextInt();
+		
+		
+			System.out.println("New name: ");
+			String newName = reader.nextLine();
+			reader.nextLine();
+		
+			System.out.println("New pagesNumber: ");
+			int newPagesNumber = reader.nextInt();
+		
+			System.out.print("New URL: ");
+			String newURL = reader.nextLine();
+		
+		    System.out.print("New short review: ");
+			String newShortReview = reader.nextLine();
+		
+			System.out.print("New product value: ");
+			double newProductValue = reader.nextDouble();
+		
+			System.out.println("New publication date:");
+			System.out.print("Year: ");
+			int year = reader.nextInt();
+			System.out.print("Month: ");
+			int month = reader.nextInt();
+			System.out.print("Day: ");
+			int day = reader.nextInt();
+		
+			Calendar newPublicationDate = Calendar.getInstance();
+			newPublicationDate.set(year, month - 1, day);
+
+				if (productType == 1) {
+
+				System.out.println("new short review: ");
+				newShortReview = reader.nextLine();
+
+				System.out.print("New genre (1. for Science Fiction, 2. for Fantasy, 3. for Historical Novel): ");
+				int newGenre = reader.nextInt();
+
+				controller.modifyProduct(product, productName, newName, newPagesNumber, newPublicationDate, newProductValue, newURL, newShortReview, null, newGenre, 0);
+
+				}else if(productType==2){
+					System.out.println("new periodicity of issuance : ");
+					String  newPeriodicityOfIssuance = reader.nextLine();
+
+					System.out.println("select the new category (1.Varieties , 2.Design , 3.Scientific )");
+					int newCategory = reader.nextInt();
+
+					controller.modifyProduct(product, productName, newName, newPagesNumber, newPublicationDate, newProductValue, newURL, null, newPeriodicityOfIssuance, 0, newCategory);
+
+				}
+		
+					
+				 else {
+					System.out.println("Invalid product type");
+				}
+			
+		}
 	}
+		
 
-}
+
+		
+   

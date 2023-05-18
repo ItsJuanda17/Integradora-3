@@ -75,6 +75,11 @@ public class Magazine extends BibliographicProducts {
         return category;
     }
 
+	public void setCategory(Category category){
+		this.category = category;
+		
+	}
+
 
 
 }

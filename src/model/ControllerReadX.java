@@ -105,10 +105,15 @@ public class ControllerReadX {
 
 	}
 
-	public void displayProductList() {
+	public void displayProductList(BibliographicProducts productToShow) {
+
+		System.out.println("--------------------");
 		System.out.println("LIST OF BIBLIOGRAPHIC PRODUCTS");
 		
 		for (BibliographicProducts product : productList) {
+			if(productToShow != null && !product.equals(productToShow)){
+				continue;
+			}
 			String id = product.generateRandomId();
 			System.out.println("Product ID: " + id);
 			System.out.println("Name: " + product.getName());
@@ -141,29 +146,75 @@ public class ControllerReadX {
 		return dateFormat.format(publicationDate.getTime());
 	}
 
-	public String modifyProduct(String productName , String newName , int newPagesNumber ,Calendar newPublicationDate, double newProductValue , String newURL , String newShortReview , String newPeriodicityOfIssuance  ){
+	public BibliographicProducts findProductByName(String productName){
 		for (BibliographicProducts product : productList) {
-			if (product.getName().equalsIgnoreCase(productName)) {
-				product.setName(newName);
-				product.setPagesNumber(newPagesNumber);
-				product.setPublicationDate(newPublicationDate);
-				product.setProductValue(newProductValue);
-				product.setURL(newURL);
-				
-				if (product instanceof Book) {
-					((Book) product).setShortReview(newShortReview);
-				} else if (product instanceof Magazine) {
-					((Magazine) product).setPeriodicityOfIssuance(newPeriodicityOfIssuance);
-				}
-				
-				return "The product has been successfully modified ";
+			if (product.getName().equals(productName)) {
+				return product;
 			}
 		}
-		
-		return "The product doesnt exist ";
+		return null;
+	}
 
+	
+	
+	public String modifyProduct(BibliographicProducts product, String productName , String newName , int newPagesNumber ,Calendar newPublicationDate, double newProductValue , String newURL , String newShortReview , String newPeriodicityOfIssuance, int newGenre , int newCategory  ){
+
+		if (product instanceof Book ){
+
+			Book book = (Book) product;
+
+			book.setName(newName);
+			book.setPagesNumber(newPagesNumber);
+			book.setPublicationDate(newPublicationDate);
+			book.setProductValue(newProductValue);
+			book.setURL(newURL);
+			book.setShortReview(newShortReview);
+			
+			Genre genre;
+
+			if(newGenre == 1){
+				genre = Genre.SCIENCE_FICTION;
+
+			}else if(newGenre == 2 ){
+				genre = Genre.FANTASY;
+			
+			}else{
+				genre = Genre.HISTORICAL_NOVEL;
+			}
+
+			book.setGenre(genre);
+
+
+		}else if (product instanceof Magazine ){
+			Magazine magazine = (Magazine) product;
+
+			magazine.setName(newName);
+			magazine.setPagesNumber(newPagesNumber);
+			magazine.setPublicationDate(newPublicationDate);
+			magazine.setProductValue(newProductValue);
+			magazine.setURL(newURL);
+			magazine.setPeriodicityOfIssuance(newPeriodicityOfIssuance);
+			
+			Category category;
+			
+			if(newCategory==1){
+				category = Category.VARIETIES;
+			
+			}else if (newCategory==2){
+				category = Category.DESIGN;
+
+			}else{
+				category = Category.SCIENTIFIC;
+			}
+			magazine.setCategory(category);	
+		}
+		
+		return "The product has been succesfully registered";
+		
 
 	}
+
+
 
 
 
