@@ -214,8 +214,57 @@ public class ControllerReadX {
 
 	}
 
+	public boolean deleteBibliographicProducts(String productName){
+		for (BibliographicProducts product : productList) {
+			if (product.getName().equals(productName)) {
+				productList.remove(product);
+				return true;
+			}
+		}
+		return false;
+	}
+	
+		
+	
 
+	public void displayProductListAll() {
 
-
-
+		System.out.println("--------------------");
+		System.out.println("LIST OF BIBLIOGRAPHIC PRODUCTS");
+		
+		for (BibliographicProducts product : productList) {
+			
+			String id = product.generateRandomId();
+			System.out.println("Product ID: " + id);
+			System.out.println("Name: " + product.getName());
+			System.out.println("Pages Number: " + product.getPagesNumber());
+			System.out.println("Publication Date: " + formatPublicationDate(product.getPublicationDate()));
+			System.out.println("Accumulated Pages Read: " + product.getAccumulatedPagesRead());
+			System.out.println("Product Value: " + product.getProductValue());
+			System.out.println("URL: " + product.getURL());
+			
+			if (product instanceof Book) {
+				Book book = (Book) product;
+				
+				System.out.println("Short Review: " + book.getShortReview());
+				System.out.println("Copies Sold: " + book.getCopiesSold());
+				System.out.println("Genre: " + book.getGenre());
+			} else if (product instanceof Magazine) {
+				Magazine magazine = (Magazine) product;
+				
+				System.out.println("Periodicity of Issuance: " + magazine.getPeriodicityOfIssuance());
+				System.out.println("Active Subscriptions: " + magazine.getActiveSuscriptions());
+				System.out.println("Category: " + magazine.getCategory());
+			}
+			
+			System.out.println("--------------------");
+		}
+	}
 }
+
+
+
+
+
+
+

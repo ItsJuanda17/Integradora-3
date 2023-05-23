@@ -47,7 +47,9 @@ public class Main {
 			System.out.println("1. Register User");
 			System.out.println("2.Users list");
 			System.out.println("3.Register bibliographic products");
-			System.out.println("4.Modify bibliographic products");
+			System.out.println("4.Bibliographic's list");
+			System.out.println("5.Modify bibliographic products");
+			System.out.println("6.Delete bibliographic products");
 			
 	}
 
@@ -68,12 +70,17 @@ public class Main {
 			case 3:
 			    registerBibliographicProducts();
 				break;
-
-	
-			
 			
 			case 4:
+			    controller.displayProductListAll();
+				break;
+
+			case 5:
 			    modifyBibliographicProducts();
+				break;
+
+			case 6:
+			    deleteBibliographicProducts();
 				break;
 
 			
@@ -274,20 +281,18 @@ public class Main {
 		
 			System.out.println("Please select the type of product to modify (1. Book, 2. Magazine): ");
 			int productType = reader.nextInt();
-		
+			reader.nextLine();
 		
 			System.out.println("New name: ");
 			String newName = reader.nextLine();
-			reader.nextLine();
-		
+			
 			System.out.println("New pagesNumber: ");
 			int newPagesNumber = reader.nextInt();
+			reader.nextLine();
 		
 			System.out.print("New URL: ");
 			String newURL = reader.nextLine();
 		
-		    System.out.print("New short review: ");
-			String newShortReview = reader.nextLine();
 		
 			System.out.print("New product value: ");
 			double newProductValue = reader.nextDouble();
@@ -304,17 +309,20 @@ public class Main {
 			newPublicationDate.set(year, month - 1, day);
 
 				if (productType == 1) {
+					reader.nextLine();
 
-				System.out.println("new short review: ");
-				newShortReview = reader.nextLine();
+				 System.out.println("New short review: ");
+				 String newShortReview = reader.nextLine();
 
-				System.out.print("New genre (1. for Science Fiction, 2. for Fantasy, 3. for Historical Novel): ");
-				int newGenre = reader.nextInt();
+				 System.out.print("New genre (1. for Science Fiction, 2. for Fantasy, 3. for Historical Novel): ");
+				 int newGenre = reader.nextInt();
 
-				controller.modifyProduct(product, productName, newName, newPagesNumber, newPublicationDate, newProductValue, newURL, newShortReview, null, newGenre, 0);
+				 controller.modifyProduct(product, productName, newName, newPagesNumber, newPublicationDate, newProductValue, newURL, newShortReview, null, newGenre, 0);
 
-				}else if(productType==2){
-					System.out.println("new periodicity of issuance : ");
+			    }else if(productType==2){
+					reader.nextLine();
+
+					System.out.println("New periodicity of issuance : ");
 					String  newPeriodicityOfIssuance = reader.nextLine();
 
 					System.out.println("select the new category (1.Varieties , 2.Design , 3.Scientific )");
@@ -323,14 +331,35 @@ public class Main {
 					controller.modifyProduct(product, productName, newName, newPagesNumber, newPublicationDate, newProductValue, newURL, null, newPeriodicityOfIssuance, 0, newCategory);
 
 				}
-		
-					
+				
 				 else {
 					System.out.println("Invalid product type");
 				}
-			
-		}
+				controller.displayProductList(product);
 	}
+    
+	//Corregir error de que solo puede recibir una palabra 
+	public void deleteBibliographicProducts(){
+		    
+		   
+			System.out.println("\nPlease enter the name of the product that you want to delete: ");
+			String productName = reader.next();
+			
+			
+			boolean delete = controller.deleteBibliographicProducts(productName);
+		
+			if (delete) {
+				System.out.println("The product has been deleted");
+			} else {
+				System.out.println("The product name was not found");
+			}
+		
+		
+		
+	}
+
+
+}
 		
 
 
