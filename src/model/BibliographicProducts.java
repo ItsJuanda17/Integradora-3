@@ -102,6 +102,12 @@ public abstract class BibliographicProducts {
 
 	public abstract String generateRandomId();
 
+	public abstract void updateCopiesSold();
+
+    public abstract void increaseActiveSuscriptions ();
+
+    public abstract void unsbscribeMagazine();
+
 	
 
 }

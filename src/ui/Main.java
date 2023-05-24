@@ -50,6 +50,8 @@ public class Main {
 			System.out.println("4.Bibliographic's list");
 			System.out.println("5.Modify bibliographic products");
 			System.out.println("6.Delete bibliographic products");
+			System.out.println("7.Buy bibliographic products");
+			System.out.println("8.Unsubscribe of a magazine");
 			
 	}
 
@@ -83,13 +85,18 @@ public class Main {
 			    deleteBibliographicProducts();
 				break;
 
-			
-			
-			
+			case 7:
+			    buyBookAndSubscribeToMagazine();
+			    break;
+
+			case 8:
+				unsubscribeMagazine();
+				break;
+
 			default :
 			    System.out.println("Plesea type an option valid");
+			break;
 			 
-
 		}
 	}
 
@@ -358,8 +365,71 @@ public class Main {
 		
 	}
 
+	public void buyBookAndSubscribeToMagazine() {
+		System.out.println("BUY BOOK AND SUBSCRIBE TO MAGAZINE");
+		System.out.println("Please select an option:");
+		System.out.println("1. Buy a book");
+		System.out.println("2. Subscribe to a magazine");
+
+		int option = validateIntegerInput();
+
+		switch(option){
+
+			case 1 : 
+
+			System.out.println("BUY BOOK");
+			System.out.println("Please enter the name of the book you want to buy: ");
+			String bookName = reader.next();
+		
+			// Obtener la fecha actual del controlador
+			Calendar operationDateBook = controller.generateCurrentDate();
+
+			System.out.println("Please enter the money with which you are going to make the purchase :");
+			double money = reader.nextDouble();
+		
+			// Comprar el libro
+			String buyBookResult = controller.buyBook(bookName, operationDateBook , money);
+			System.out.println(buyBookResult);
+			break;
+
+			case 2: 
+
+			System.out.println("SUBSCRIBE TO MAGAZINE");
+			System.out.println("Please enter the name of the magazine you want to subscribe to: ");
+			String magazineName = reader.next();
+		
+			// Obtener la fecha actual del controlador
+			Calendar operationDateMagazine = controller.generateCurrentDate();
+
+			System.out.println("Please enter the money with which you are going to make the purchase :");
+			double cash = reader.nextDouble();
+		
+			// Suscribirse a la revista
+			String subscribeMagazineResult = controller.subscribeToMagazine(magazineName, operationDateMagazine, cash);
+			System.out.println(subscribeMagazineResult);
+			break;
+		}
+	}
+
+	public void unsubscribeMagazine(){
+
+		System.out.println("Please enter the name of the magazine that you want unsubscribe: ");
+		String name = reader.next();
+
+		controller.unsubscribeMagazine(name);
+	}
+
+
+		
+
+
+
+
+
 
 }
+
+
 		
 
 

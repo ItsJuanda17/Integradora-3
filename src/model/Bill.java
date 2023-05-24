@@ -9,11 +9,11 @@ public class Bill {
 	/**
 	 * 
 	 * @param operationDate
-	 * @param amountPaind
+	 * @param amountPaid
 	 */
-	public Bill(Calendar operationDate, double amountPaind) {
-		// TODO - implement Bill.Bill
-		throw new UnsupportedOperationException();
+	public Bill(Calendar operationDate, double amountPaid) {
+		this.operationDate = operationDate;
+		this.amountPaid = amountPaid;
 	}
 
 	public Calendar getOperationDate() {

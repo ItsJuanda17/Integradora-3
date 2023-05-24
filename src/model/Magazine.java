@@ -74,9 +74,24 @@ public class Magazine extends BibliographicProducts {
 	public Category getCategory() {
         return category;
     }
-
+    
 	public void setCategory(Category category){
 		this.category = category;
+		
+	}
+    
+	@Override
+	public void increaseActiveSuscriptions(){
+		activeSuscriptions ++;
+	}
+    
+	@Override
+	public void unsbscribeMagazine(){
+		activeSuscriptions--;
+	}
+
+	@Override
+	public void updateCopiesSold(){
 		
 	}
 

@@ -83,6 +83,21 @@ public class Book extends BibliographicProducts {
 	public void setGenre(Genre genre){
 		this.genre = genre;
 	}
+    
+	@Override
+	public void updateCopiesSold(){
+		copiesSold++;
+	}
+
+	@Override
+	public void unsbscribeMagazine(){
+
+	}
+
+	@Override
+	public void increaseActiveSuscriptions(){
+
+	}
 
 }
 

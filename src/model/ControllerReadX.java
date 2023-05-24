@@ -10,11 +10,13 @@ public class ControllerReadX {
 
 	private ArrayList <User> userList;
 	private ArrayList<BibliographicProducts> productList;
+	private ArrayList <Bill> billList;
 
 	public ControllerReadX(){
 
 		userList = new ArrayList<User>();
 		productList = new ArrayList<BibliographicProducts>();
+		billList = new ArrayList <Bill>();
 	}
 
 	public void createUser(String name , String cc , Calendar vinculationDate , int type){
@@ -52,6 +54,10 @@ public class ControllerReadX {
 	
         }
 
+	}
+
+	public Calendar generateCurrentDate(){
+		return Calendar.getInstance();
 	}
 
 	public void registerBook(String name,  int pagesNumber, Calendar publicationDate, int accumulatedPagesRead,double productValue, String URL, String shortReview, int copiesSold, int genre   ){
@@ -105,6 +111,7 @@ public class ControllerReadX {
 
 	}
 
+	//Lista para ver los productos por nombre 
 	public void displayProductList(BibliographicProducts productToShow) {
 
 		System.out.println("--------------------");
@@ -224,9 +231,7 @@ public class ControllerReadX {
 		return false;
 	}
 	
-		
-	
-
+	//Lista para ver todos los productos registrados 
 	public void displayProductListAll() {
 
 		System.out.println("--------------------");
@@ -260,6 +265,83 @@ public class ControllerReadX {
 			System.out.println("--------------------");
 		}
 	}
+
+	public void saveBill(Bill bill){
+		billList.add(bill);
+	}
+
+	public String buyBook(String bookName , Calendar operationDate , double amountPaid  ){
+        
+		BibliographicProducts product = findProductByName(bookName);
+        if (product instanceof Book){
+
+		 Book book = (Book) product;
+		 double price = book.getProductValue();
+
+		   if(amountPaid >= price){
+			  double change = amountPaid  - price;
+			  Bill bill = new Bill(operationDate , amountPaid);
+			  book.updateCopiesSold();
+			  saveBill(bill);
+			
+			  return "The book has been purchased successfully. Change: $" + change;
+		
+		     }else{
+			 return "Insufficient payment. The book price is : $ " + price;
+
+		    } 
+	    }else {
+		    return "Invalid product type";
+    
+	    }
+
+    }
+
+	public String subscribeToMagazine(String magazineName , Calendar operationDate , double amountPaid){
+        
+		BibliographicProducts product = findProductByName(magazineName);
+		if(product instanceof Magazine){
+
+			Magazine magazine = (Magazine) product;
+			double price = magazine.getProductValue();
+
+			if(amountPaid >=  price){
+				double change = amountPaid - price;
+				Bill bill = new Bill(operationDate , amountPaid);
+		        magazine.increaseActiveSuscriptions();
+		        saveBill(bill);
+
+		        return "The magazin has been purchased succesfully. Change : $" + change;
+		
+			}else {
+				return "Insufficient payment. The magazine price is : $ " + price;
+			}
+		}else {
+			return "Invalid  product type";
+		}
+	}
+
+	public String unsubscribeMagazine(String magazineName){
+
+		BibliographicProducts product = findProductByName(magazineName);
+		if (product instanceof Magazine ){
+			Magazine magazine = (Magazine) product;
+
+			if(magazine.getActiveSuscriptions()> 0){
+				magazine.unsbscribeMagazine();
+				return "Subscription to the magazine has been canceled succesfully";
+
+
+			}else{
+				return "There aren't active subscriptions for the magazine";
+
+			}
+		}else {
+			return "Invalid product type";
+		}
+	}
+
+
 }
 
 
