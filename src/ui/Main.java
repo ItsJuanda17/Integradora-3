@@ -52,6 +52,7 @@ public class Main {
 			System.out.println("6.Delete bibliographic products");
 			System.out.println("7.Buy bibliographic products");
 			System.out.println("8.Unsubscribe of a magazine");
+			System.out.println("9.Start reading session");
 			
 	}
 
@@ -92,7 +93,11 @@ public class Main {
 			case 8:
 				unsubscribeMagazine();
 				break;
-
+			
+			case 9:
+                startReadingSession();
+				break;
+			
 			default :
 			    System.out.println("Plesea type an option valid");
 			break;
@@ -381,13 +386,13 @@ public class Main {
 			System.out.println("Please enter the name of the book you want to buy: ");
 			String bookName = reader.next();
 		
-			// Obtener la fecha actual del controlador
+			
 			Calendar operationDateBook = controller.generateCurrentDate();
 
 			System.out.println("Please enter the money with which you are going to make the purchase :");
 			double money = reader.nextDouble();
 		
-			// Comprar el libro
+			
 			String buyBookResult = controller.buyBook(bookName, operationDateBook , money);
 			System.out.println(buyBookResult);
 			break;
@@ -398,13 +403,13 @@ public class Main {
 			System.out.println("Please enter the name of the magazine you want to subscribe to: ");
 			String magazineName = reader.next();
 		
-			// Obtener la fecha actual del controlador
+			
 			Calendar operationDateMagazine = controller.generateCurrentDate();
 
 			System.out.println("Please enter the money with which you are going to make the purchase :");
 			double cash = reader.nextDouble();
 		
-			// Suscribirse a la revista
+			
 			String subscribeMagazineResult = controller.subscribeToMagazine(magazineName, operationDateMagazine, cash);
 			System.out.println(subscribeMagazineResult);
 			break;
@@ -418,6 +423,57 @@ public class Main {
 
 		controller.unsubscribeMagazine(name);
 	}
+
+	public void startReadingSession() {
+		System.out.println("Please enter the name of the product to read: ");
+		String productName = reader.next();
+	
+		BibliographicProducts product = controller.findProductByName(productName);
+		int currentPage = 1; 
+		if (product != null) {
+			controller.startReadingSession(product, currentPage);
+	
+			while (true) {
+				System.out.println("Session in progress:");
+				System.out.println("Reading: " + product.getName());
+				System.out.println("Current page: " + currentPage + " of " + product.getPagesNumber());
+				System.out.println("________________________________________");
+				System.out.println("Options:");
+				System.out.println("Enter 'A' to go to the previous page");
+				System.out.println("Enter 'S' to go to the next page");
+				System.out.println("Enter 'B' to exit the reading session");
+	
+				String option = reader.next();
+				controller.processOption(option, currentPage, product.getPagesNumber());
+	
+				if (option.equalsIgnoreCase("B")) {
+					System.out.println("Exiting reading session");
+					break;
+				}
+			}
+		} else {
+			System.out.println("The product was not found. Please verify the name entered.");
+		}
+
+		
+	}
+
+	public void generateReport() {
+			
+		System.out.println("Please enter the name of the product: ");
+		String productName = reader.next();
+	
+		BibliographicProducts product = controller.findProductByName(productName);
+		if (product != null) {
+			int accumulatedPagesRead = controller.getAccumulatedPagesRead(product);
+			System.out.println("Accumulated pages read for " + product.getName() + ": " + accumulatedPagesRead);
+		} else {
+			System.out.println("The product was not found. Please verify the name entered.");
+		}
+	}
+	
+	
+	
 
 
 		

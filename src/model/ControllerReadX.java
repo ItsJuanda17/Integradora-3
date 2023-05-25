@@ -341,6 +341,57 @@ public class ControllerReadX {
 		}
 	}
 
+	
+	public int getAccumulatedPagesRead(BibliographicProducts product) {
+		if (product != null) {
+			return product.getAccumulatedPagesRead();
+		} else {
+			return 0; 
+		}
+	}
+	
+
+	public void startReadingSession(BibliographicProducts product, int currentPage) {
+		if (product != null) {
+			System.out.println("Starting reading session for: " + product.getName());
+			System.out.println("Actual progress: " + product.getAccumulatedPagesRead() + " pages read");
+			System.out.println("Total pages: " + product.getPagesNumber());
+			System.out.println("Current page: " + currentPage);
+	
+			
+		} else {
+			System.out.println("The product was not found. Please verify the name entered.");
+		}
+	}
+	
+	public void processOption(String option, int currentPage, int totalPages) {
+		switch (option) {
+			case "A":
+				if (currentPage > 1) {
+					currentPage--;
+				} else {
+					System.out.println("You are already on the first page of the book.");
+				}
+				break;
+			case "S":
+				if (currentPage < totalPages) {
+					currentPage++;
+				} else {
+					System.out.println("You are already on the last page of the book.");
+				}
+				break;
+			default:
+				System.out.println("Invalid option. Please try again.");
+		}
+	}
+
+
+	
+	
+	
+
+	
+
 
 }
 
