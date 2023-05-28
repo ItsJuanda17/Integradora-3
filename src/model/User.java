@@ -1,11 +1,13 @@
 package model;
 import java.util.Calendar;
+import java.util.ArrayList;
 
 public abstract class User {
 
 	private String name;
 	private String cc;
 	private Calendar vinculationDate;
+	private ArrayList<BibliographicProducts> purchasedProducts;
 
 	/**
 	 * 
@@ -17,6 +19,8 @@ public abstract class User {
 		this.name = name;
 		this.cc=cc;
 		this.vinculationDate=vinculationDate;
+
+		purchasedProducts = new ArrayList<>();
 	}
 
 	public String getName() {
@@ -57,6 +61,14 @@ public abstract class User {
 
 	public String toString(){
 		return name;
+	}
+
+	public void addPurchasedProduct(BibliographicProducts product) {
+		purchasedProducts.add(product);
+	}
+
+	public ArrayList<BibliographicProducts> getPurchasedProducts() {
+		return purchasedProducts;
 	}
 
 }

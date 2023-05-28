@@ -43,16 +43,17 @@ public class Main {
 	}
 
 	public void menu(){
-			System.out.println("0. Exit the system");
-			System.out.println("1. Register User");
-			System.out.println("2.Users list");
-			System.out.println("3.Register bibliographic products");
-			System.out.println("4.Bibliographic's list");
-			System.out.println("5.Modify bibliographic products");
-			System.out.println("6.Delete bibliographic products");
-			System.out.println("7.Buy bibliographic products");
-			System.out.println("8.Unsubscribe of a magazine");
-			System.out.println("9.Start reading session");
+			System.out.println("0.  Exit the system");
+			System.out.println("1.  Register User");
+			System.out.println("2.  Users list");
+			System.out.println("3.  Register bibliographic products");
+			System.out.println("4.  Bibliographic's list");
+			System.out.println("5.  Modify bibliographic products");
+			System.out.println("6.  Delete bibliographic products");
+			System.out.println("7.  Buy bibliographic products");
+			System.out.println("8.  Unsubscribe of a magazine");
+			System.out.println("9.  Start reading session");
+			System.out.println("10. Show library ");
 			
 	}
 
@@ -97,6 +98,10 @@ public class Main {
 			case 9:
                 startReadingSession();
 				break;
+
+			case 10:
+			     showLibrary();
+				 break;
 			
 			default :
 			    System.out.println("Plesea type an option valid");
@@ -281,16 +286,7 @@ public class Main {
 			System.out.println("Enter the name of the product to modify: ");
 			String productName = reader.next();
 		
-			BibliographicProducts product = controller.findProductByName(productName);
-		
-			if (product == null) {
-				System.out.println("Product not found");
-				return;
-			}
-		
-			System.out.println("The product is found");
-			controller.displayProductList(product);
-		
+			
 			System.out.println("Please select the type of product to modify (1. Book, 2. Magazine): ");
 			int productType = reader.nextInt();
 			reader.nextLine();
@@ -329,7 +325,8 @@ public class Main {
 				 System.out.print("New genre (1. for Science Fiction, 2. for Fantasy, 3. for Historical Novel): ");
 				 int newGenre = reader.nextInt();
 
-				 controller.modifyProduct(product, productName, newName, newPagesNumber, newPublicationDate, newProductValue, newURL, newShortReview, null, newGenre, 0);
+				String resultBook = controller.modifyProduct( productName, newName, newPagesNumber, newPublicationDate, newProductValue, newURL, newShortReview, null, newGenre, 0);
+				System.out.println(resultBook);
 
 			    }else if(productType==2){
 					reader.nextLine();
@@ -340,14 +337,61 @@ public class Main {
 					System.out.println("select the new category (1.Varieties , 2.Design , 3.Scientific )");
 					int newCategory = reader.nextInt();
 
-					controller.modifyProduct(product, productName, newName, newPagesNumber, newPublicationDate, newProductValue, newURL, null, newPeriodicityOfIssuance, 0, newCategory);
+					String resultMagazine =  controller.modifyProduct( productName, newName, newPagesNumber, newPublicationDate, newProductValue, newURL, null, newPeriodicityOfIssuance, 0, newCategory);
+					System.out.println(resultMagazine);
 
 				}
 				
 				 else {
 					System.out.println("Invalid product type");
 				}
-				controller.displayProductList(product);
+				
+	}
+	public void buyBookAndSubscribeToMagazine() {
+		System.out.println("BUY BOOK AND SUBSCRIBE TO MAGAZINE");
+		System.out.println("Please enter the name of the user: ");
+		String userName = reader.next();
+	
+		System.out.println("Please select an option (1.Book or 2.Magazine): ");
+		int option = reader.nextInt();
+	
+		switch (option) {
+			case 1:
+				System.out.println("BUY BOOK");
+				System.out.println("Please enter the name of the book you want to buy: ");
+				String bookName = reader.next();
+	
+				Calendar operationDateBook = controller.generateCurrentDate();
+	
+				System.out.println("Please enter the money with which you are going to make the purchase: ");
+				double money = reader.nextDouble();
+	
+				controller.buyBook(userName, bookName, operationDateBook, money);
+				break;
+	
+			case 2:
+				System.out.println("SUBSCRIBE TO MAGAZINE");
+				System.out.println("Please enter the name of the magazine you want to subscribe to: ");
+				String magazineName = reader.next();
+	
+				Calendar operationDateMagazine = controller.generateCurrentDate();
+	
+				System.out.println("Please enter the money with which you are going to make the purchase: ");
+				double cash = reader.nextDouble();
+	
+				controller.subscribeToMagazine(userName, magazineName, operationDateMagazine, cash);
+				break;
+		}
+	}
+	
+	public void unsubscribeMagazine() {
+		System.out.println("Please enter the name of the user: ");
+		String userName = reader.next();
+	
+		System.out.println("Please enter the name of the magazine that you want to unsubscribe: ");
+		String magazineName = reader.next();
+	
+		controller.unsubscribeMagazine(userName, magazineName);
 	}
     
 	//Corregir error de que solo puede recibir una palabra 
@@ -370,73 +414,20 @@ public class Main {
 		
 	}
 
-	public void buyBookAndSubscribeToMagazine() {
-		System.out.println("BUY BOOK AND SUBSCRIBE TO MAGAZINE");
-		System.out.println("Please select an option:");
-		System.out.println("1. Buy a book");
-		System.out.println("2. Subscribe to a magazine");
-
-		int option = validateIntegerInput();
-
-		switch(option){
-
-			case 1 : 
-
-			System.out.println("BUY BOOK");
-			System.out.println("Please enter the name of the book you want to buy: ");
-			String bookName = reader.next();
-		
-			
-			Calendar operationDateBook = controller.generateCurrentDate();
-
-			System.out.println("Please enter the money with which you are going to make the purchase :");
-			double money = reader.nextDouble();
-		
-			
-			String buyBookResult = controller.buyBook(bookName, operationDateBook , money);
-			System.out.println(buyBookResult);
-			break;
-
-			case 2: 
-
-			System.out.println("SUBSCRIBE TO MAGAZINE");
-			System.out.println("Please enter the name of the magazine you want to subscribe to: ");
-			String magazineName = reader.next();
-		
-			
-			Calendar operationDateMagazine = controller.generateCurrentDate();
-
-			System.out.println("Please enter the money with which you are going to make the purchase :");
-			double cash = reader.nextDouble();
-		
-			
-			String subscribeMagazineResult = controller.subscribeToMagazine(magazineName, operationDateMagazine, cash);
-			System.out.println(subscribeMagazineResult);
-			break;
-		}
-	}
-
-	public void unsubscribeMagazine(){
-
-		System.out.println("Please enter the name of the magazine that you want unsubscribe: ");
-		String name = reader.next();
-
-		controller.unsubscribeMagazine(name);
-	}
-
+	
 	public void startReadingSession() {
 		System.out.println("Please enter the name of the product to read: ");
 		String productName = reader.next();
 	
 		BibliographicProducts product = controller.findProductByName(productName);
-		int currentPage = 1; 
 		if (product != null) {
+			int currentPage = 1;
 			controller.startReadingSession(product, currentPage);
 	
 			while (true) {
 				System.out.println("Session in progress:");
-				System.out.println("Reading: " + product.getName());
-				System.out.println("Current page: " + currentPage + " of " + product.getPagesNumber());
+				System.out.println("Reading: " + product.getName());	
+				System.out.println("Current page: " + currentPage + " of " + product.getPagesNumber());			
 				System.out.println("________________________________________");
 				System.out.println("Options:");
 				System.out.println("Enter 'A' to go to the previous page");
@@ -444,7 +435,8 @@ public class Main {
 				System.out.println("Enter 'B' to exit the reading session");
 	
 				String option = reader.next();
-				controller.processOption(option, currentPage, product.getPagesNumber());
+				currentPage=controller.processOption(option, currentPage, product.getPagesNumber(), product);
+				
 	
 				if (option.equalsIgnoreCase("B")) {
 					System.out.println("Exiting reading session");
@@ -454,9 +446,9 @@ public class Main {
 		} else {
 			System.out.println("The product was not found. Please verify the name entered.");
 		}
-
-		
 	}
+	
+	
 
 	public void generateReport() {
 			
@@ -470,6 +462,13 @@ public class Main {
 		} else {
 			System.out.println("The product was not found. Please verify the name entered.");
 		}
+	}
+
+	public void showLibrary(){
+		System.out.println("Please type your user name: ");
+		String userName = reader.next();
+
+		controller.showLibrary(userName);
 	}
 	
 	

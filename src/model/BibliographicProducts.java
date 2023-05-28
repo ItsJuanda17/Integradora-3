@@ -5,6 +5,7 @@ import java.util.Calendar;
 public abstract class BibliographicProducts {
 
 	private String name;
+	private int currentPage;
 	private int pagesNumber;
 	private Calendar publicationDate;
 	private int accumulatedPagesRead;
@@ -29,12 +30,11 @@ public abstract class BibliographicProducts {
 		this.productValue = productValue;
 		this.URL= URL;
 
-
 		
 	}
 
 	public String getName() {
-		return this.name;
+		return name;
 	}
 
 	/**
@@ -55,13 +55,13 @@ public abstract class BibliographicProducts {
 	 */
 	public void setPublicationDate(Calendar publicationDate) {
 		
-		this.publicationDate = publicationDate;
+	   this.publicationDate = publicationDate;
 	}
 
 	
 
 	public double getProductValue() {
-		return this.productValue;
+		return productValue;
 	}
 
 	/**
@@ -100,13 +100,17 @@ public abstract class BibliographicProducts {
 		this.pagesNumber = pagesNumber;
 	}
 
+	
+
 	public abstract String generateRandomId();
 
 	public abstract void updateCopiesSold();
 
-    public abstract void increaseActiveSuscriptions ();
+    public abstract void increaseActiveSubscriptions ();
 
-    public abstract void unsbscribeMagazine();
+
+
+    public abstract void unsubscribeMagazine();
 
 	
 

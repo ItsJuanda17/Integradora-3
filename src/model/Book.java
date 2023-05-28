@@ -90,12 +90,12 @@ public class Book extends BibliographicProducts {
 	}
 
 	@Override
-	public void unsbscribeMagazine(){
+	public void unsubscribeMagazine(){
 
 	}
 
 	@Override
-	public void increaseActiveSuscriptions(){
+	public void increaseActiveSubscriptions(){
 
 	}
 

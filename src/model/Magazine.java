@@ -44,7 +44,7 @@ public class Magazine extends BibliographicProducts {
 		this.periodicityOfIssuance = periodicityOfIssuance;
 	}
 
-	public int getActiveSuscriptions() {
+	public int getActiveSubscriptions() {
 		return this.activeSuscriptions;
 	}
 
@@ -52,7 +52,7 @@ public class Magazine extends BibliographicProducts {
 	 * 
 	 * @param activeSuscriptions
 	 */
-	public void setActiveSuscriptions(int activeSuscriptions) {
+	public void setActiveSubscriptions(int activeSuscriptions) {
 		this.activeSuscriptions = activeSuscriptions;
 	}
 
@@ -81,12 +81,12 @@ public class Magazine extends BibliographicProducts {
 	}
     
 	@Override
-	public void increaseActiveSuscriptions(){
+	public void increaseActiveSubscriptions(){
 		activeSuscriptions ++;
 	}
     
 	@Override
-	public void unsbscribeMagazine(){
+	public void unsubscribeMagazine(){
 		activeSuscriptions--;
 	}
 
